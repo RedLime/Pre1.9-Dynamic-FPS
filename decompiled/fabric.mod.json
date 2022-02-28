@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"id": "dynamicmenufps",
+	"version": "0.1",
+
+	"name": "Dynamic Menu FPS",
+	"description": "Dynamically adjusts FPS on pause screen so minecraft doesn't hog resources in background.",
+	"authors": [
+		"MrMangoHands"
+	],
+
+	"license": "MIT",
+
+	"environment": "client",
+	"entrypoints": {
+		"main": [
+			"dynamicmenufps.DynamicMenuFPSMod"
+		]
+	},
+	"mixins": [
+		"dynamicmenufps.mixins.json"
+	],
+
+	"depends": {
+		"fabricloader": ">=0.4.0"
+	}
+}

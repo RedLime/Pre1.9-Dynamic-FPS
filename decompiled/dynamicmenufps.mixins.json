@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "dynamicmenufps.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [],
+  "client": [
+    "GameRendererMixin",
+    "MinecraftClientMixin",
+    "ThreadExecutorMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "dynamic-menu-fps-refmap.json"
+}
