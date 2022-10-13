@@ -17,7 +17,7 @@ public class GameRendererMixin {
 
     //  1.7.x - method_1331
     //  1.8-1.12.2 - method_9775
-    @Inject(method = {"method_1331", "method_9775"}, at = @At("HEAD"), cancellable = true)
+    @Inject(method = {"method_1331", "method_9775"}, at = @At("HEAD"), cancellable = true, remap = false)
     private void onRender(CallbackInfo ci) {
         if (this.client.currentScreen instanceof GameMenuScreen && !DynamicMenuFPSMod.checkForRender()) {
             ci.cancel();
