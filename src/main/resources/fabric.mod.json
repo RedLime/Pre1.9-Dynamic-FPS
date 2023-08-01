@@ -11,6 +11,11 @@
   ],
   "license": "MIT",
   "environment": "client",
+  "entrypoints": {
+    "client": [
+      "me.bluesmoke.mangodfps.DynamicMenuFPSMod"
+    ]
+  },
   "mixins": [
     "mangodfps.mixins.json"
   ],

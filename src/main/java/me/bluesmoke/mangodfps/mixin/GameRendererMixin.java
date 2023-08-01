@@ -9,8 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.lang.reflect.InvocationTargetException;
-
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
 
@@ -30,20 +28,12 @@ public class GameRendererMixin {
             cancellable = true,
             remap = false
     )
-    private void onRender(CallbackInfo ci) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        Class<?> minecraftClient;
-        try {
-            // 1.6-1.12
-            // class_1600 -> MinecraftClient
-            minecraftClient = Class.forName("net.minecraft.class_1600");
-        } catch (ClassNotFoundException e) {
-            // 1.3-1.5
-            minecraftClient = Class.forName("net.minecraft.client.Minecraft");
-        }
+    private void onRender(CallbackInfo ci) throws NoSuchFieldException, IllegalAccessException {
+
         // method_2965 -> Minecraft::getMinecraft, MinecraftClient::getInstance
         // field_3816 -> Minecraft#currentScreen, MinecraftClient#currentScreen
-        Screen currentScreen = (Screen) minecraftClient.getDeclaredField("field_3816").get(
-                minecraftClient.getMethod("method_2965").invoke(null)
+        Screen currentScreen = (Screen) DynamicMenuFPSMod.minecraftClient.getDeclaredField("field_3816").get(
+                DynamicMenuFPSMod.minecraftClientInstance
         );
 
         if (currentScreen instanceof GameMenuScreen && !DynamicMenuFPSMod.checkForRender()) {
