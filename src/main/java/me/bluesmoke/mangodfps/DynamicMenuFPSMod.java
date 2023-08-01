@@ -1,24 +1,19 @@
 package me.bluesmoke.mangodfps;
 
-import net.fabricmc.api.ModInitializer;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
 import java.util.concurrent.locks.LockSupport;
 
-public class DynamicMenuFPSMod implements ModInitializer {
+public class DynamicMenuFPSMod {
     private static long lastRender;
-
-    public void onInitialize() {
-    }
 
     public static boolean checkForRender() {
         long currentTime = System.nanoTime() / 1000000L;
         long timeSinceLastRender = currentTime - lastRender;
 
-        if (!checkForRender(timeSinceLastRender))
-            return false;
+        if (!checkForRender(timeSinceLastRender)) return false;
 
         lastRender = currentTime;
         return true;
@@ -37,8 +32,7 @@ public class DynamicMenuFPSMod implements ModInitializer {
 
         long frameTime = (1000 / fpsOverride);
         boolean shouldSkipRender = (timeSinceLastRender < frameTime);
-        if (!shouldSkipRender)
-            return true;
+        if (!shouldSkipRender) return true;
 
         idle(frameTime);
         return false;
@@ -51,12 +45,8 @@ public class DynamicMenuFPSMod implements ModInitializer {
 
     @Nullable
     private static Integer fpsOverride() {
-        if (Mouse.isInsideWindow())
-            return null;
-
-        if (!Display.isActive())
-            return 1;
-
+        if (Mouse.isInsideWindow()) return null;
+        if (!Display.isActive()) return 1;
         return null;
     }
 }
